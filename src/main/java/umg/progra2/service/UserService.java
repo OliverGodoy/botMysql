@@ -7,6 +7,7 @@ import umg.progra2.model.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class UserService {
 
@@ -25,8 +26,6 @@ public class UserService {
             }
         }
     }
-
-
 
     public void createUser(User user) throws SQLException {
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -56,8 +55,8 @@ public class UserService {
         }
     }
 
-    public User getUserByEmail(String Email) throws SQLException {
-        return userDao.getUserByEmail(Email);
+    public User getUserByEmail(String email) throws SQLException {
+        return userDao.getUserByEmail(email);
     }
 
     public User getUserByTelegramId(long telegramid) throws SQLException {
@@ -71,6 +70,5 @@ public class UserService {
     public User getUserById(int idusuario) throws SQLException {
         return userDao.getUserById(idusuario);
     }
-
 
 }

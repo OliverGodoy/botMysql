@@ -1,5 +1,8 @@
 package umg.progra2.model;
 
+import java.sql.Timestamp;
+
+
 public class User {
 
     private int id;
@@ -65,4 +68,5 @@ public class User {
     public void setActivo(String activo) {
         this.activo = activo;
     }
+
 }

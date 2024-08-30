@@ -3,10 +3,7 @@ package umg.progra2.dao;
 import umg.progra2.db.DatabaseConnection;
 import umg.progra2.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDao {
 
@@ -18,7 +15,6 @@ public class UserDao {
             statement.executeUpdate();
         }
     }
-
 
 
 
@@ -38,7 +34,6 @@ public class UserDao {
     }
 
 
-
     public void insertUser(User user) throws SQLException {
         String query = "INSERT INTO tb_usuarios (carne, nombre, correo, seccion, telegramid, activo) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -52,6 +47,7 @@ public class UserDao {
             statement.executeUpdate();
         }
     }
+
 
     public User getUserByTelegramId(long telegramid) throws SQLException {
         String query = "SELECT * FROM tb_usuarios WHERE telegramid = ?";
@@ -73,7 +69,6 @@ public class UserDao {
         }
         return null;
     }
-
 
     public User getUserByEmail(String Email) throws SQLException {
         String query = "SELECT * FROM tb_usuarios WHERE correo = ?";

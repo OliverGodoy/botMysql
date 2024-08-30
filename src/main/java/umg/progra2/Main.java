@@ -3,37 +3,83 @@ package umg.progra2;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.generics.LongPollingBot;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-import umg.progra2.botTelegram.Bot;
-import umg.progra2.botTelegram.pokemonBot;
+import umg.progra2.botTelegram.*;
 import umg.progra2.model.User;
 import umg.progra2.service.UserService;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-//        try {
-//            TelegramBotsApi botApi = new TelegramBotsApi(DefaultBotSession.class);
-//            //Bot mibot = new Bot();
-//
-//            pokemonBot pokeDex = new pokemonBot();
-//
-//            botApi.registerBot(pokeDex);
-//
-//            System.out.println("para consultar: /pokemon pikachu");
-//            System.out.println("El bot se está ejecutando!!!");
-//
-//        }catch(Exception ex) {
-//            System.out.println("Eror sl instanciar Telegram :" +ex.getMessage());
-//        }
+        try {
+            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
+
+            botCuestionario botCuestionario = new botCuestionario();
+
+            botsApi.registerBot(botCuestionario);
+
+            System.out.println("El bot se está ejecutando!!!");
+
+        }catch(Exception ex) {
+           System.out.println("Eror sl instanciar Telegram :" +ex.getMessage());
+        }
 
         //PruebaInsertaUsuario();
-        PruebaActualizacionUsuario();
+        //PruebaActualizacionUsuario();
+        //explicacionUsoMap();
 
     }
+
+    /**
+     * Explicación y ejemplo de uso básico de la estructura de datos Map en Java.
+     *
+     * Un Map es una colección que almacena pares clave-valor.
+     * Es útil cuando necesitamos asociar valores con una clave única, como en un diccionario.
+     *
+     * Ejemplo: Si deseamos almacenar nombres de personas con su número de teléfono,
+     * podemos usar un Map donde la clave es el nombre y el valor es el número de teléfono.
+     */
+    public static void explicacionUsoMap() {
+        // Creación de un HashMap, que es una implementación común de Map.
+        Map<String, String> phoneBook = new HashMap<>();
+
+        // 1. Insertar elementos en el Map usando el método put.
+        phoneBook.put("Alice", "123-4567");
+        phoneBook.put("Bob", "987-6543");
+        phoneBook.put("Charlie", "555-7890");
+
+        // 2. Recuperar un valor a partir de una clave usando el método get.
+        String bobPhoneNumber = phoneBook.get("Bob");
+        System.out.println("El número de Bob es: " + bobPhoneNumber);
+
+        // 3. Comprobar si una clave existe en el Map.
+        if (phoneBook.containsKey("Alice")) {
+            System.out.println("El número de Alice es: " + phoneBook.get("Alice"));
+        }
+
+        // 4. Recorrer un Map usando un bucle for-each.
+        // Se pueden recorrer las claves o los valores.
+        System.out.println("\nLista completa de contactos:");
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            System.out.println("Nombre: " + entry.getKey() + ", Número: " + entry.getValue());
+        }
+
+        // 5. Eliminar un elemento del Map.
+        phoneBook.remove("Charlie");
+        System.out.println("\nDespués de eliminar a Charlie, la lista es:");
+        for (Map.Entry<String, String> entry : phoneBook.entrySet()) {
+            System.out.println("Nombre: " + entry.getKey() + ", Número: " + entry.getValue());
+        }
+
+        // 6. Tamaño del Map (número de pares clave-valor).
+        System.out.println("\nEl número total de contactos es: " + phoneBook.size());
+    }
+
 
     private static void PruebaInsertaUsuario() {
         //explicación:
@@ -63,11 +109,11 @@ public class Main {
         User user = new User();
 
         // Crear un nuevo usuarioUseruser=newUser();
-        user.setCarne("0905-12-12345");
-        user.setNombre("Angel Lopez");
-        user.setCorreo("ALopez@gmail.com");
-        user.setSeccion("A");
-        user.setTelegramid(1234567890L);
+        user.setCarne("0905-44-15345");
+        user.setNombre("Fermin Lopez");
+        user.setCorreo("FLopez@gmail.com");
+        user.setSeccion("B");
+        user.setTelegramid(1233467890L);
         user.setActivo("Y");
 
         try {
@@ -85,18 +131,18 @@ public class Main {
         User usurioObtenido;
         //obtener información del usuario por correo electrónico
         try {
-            usurioObtenido = servicioUsuaio.getUserByCarne("A001");
+            usurioObtenido = servicioUsuaio.getUserByCarne("0905-23-10816");
             System.out.println("Retrieved User: " + usurioObtenido.getNombre());
             System.out.println("Retrieved User: " + usurioObtenido.getCorreo());
             System.out.println("Retrieved User: " + usurioObtenido.getId());
 
             //actualizar información del usuario
-            usurioObtenido.setCarne("0");
-            usurioObtenido.setNombre("Ramon");
-            //usurioObtenido.setCorreo("anAscoli@gmail.com");
+            usurioObtenido.setCarne("0905-23-10816");
+            usurioObtenido.setNombre("Oliver Godoy");
+            usurioObtenido.setCorreo("ogodoys@miumg.edu.gt");
             usurioObtenido.setSeccion("B");
-            usurioObtenido.setTelegramid(1234567890L);
-            usurioObtenido.setActivo("S");
+            usurioObtenido.setTelegramid(1642696107L);
+            usurioObtenido.setActivo("Y");
 
             servicioUsuaio.updateUser(usurioObtenido);
             System.out.println("User updated successfully!");
